@@ -13,8 +13,46 @@ form.on("submit", (e) => {
     .then((response) => response.json())
     .then((data) => {
       const { main, name, sys, weather } = data;
-      console.log(Math.round(main.temp));
       const icon = `https://openweathermap.org/img/wn/${weather[0]["icon"]}@2x.png`;
+
+      //check if there's already a city
+      const listItems = $(".weather-section .city");
+      const listItemsArray = Array.from(listItems);
+
+      if (listItemsArray.length > 0) {
+        const filteredArray = listItemsArray.filter((el) => {
+          let content = "";
+          if (city_name.includes(",")) {
+            //   If length of country code is more than 2 then we ignore the country code and check only the city
+            if (city_name.split(",")[1].length > 2) {
+              city_name = city_name.split(",")[0];
+              content = el
+                .querySelector(".city-name span")
+                .textContent.toLowerCase();
+            } else {
+              content = el
+                .querySelector(".city-name")
+                .dataset.name.toLowerCase();
+            }
+          } else {
+            content = el
+              .querySelector(".city-name span")
+              .textContent.toLowerCase();
+          }
+          return content == name.toLowerCase();
+        });
+
+        if (filteredArray.length > 0) {
+          msg.text(
+            `You already know the weather for ${
+              filteredArray[0].querySelector(".city-name span").textContent
+            } ...otherwise be more specific by providing the country code as well`
+          );
+          form.trigger("reset");
+          input.focus();
+          return;
+        }
+      }
 
       const li = $(document.createElement("li"));
       li.addClass("city");
