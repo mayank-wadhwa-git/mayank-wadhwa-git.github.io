@@ -70,6 +70,22 @@ form.on("submit", (e) => {
         </figure>
       `;
       li.html(markup);
+      const preference = [];
+      const user_preference = {
+        city: `${name}`,
+        country_code: `${sys.country}`,
+        temp: `${Math.round(main.temp)}`,
+        icon: `${icon}`,
+        desc: `${weather[0]["description"]}`,
+      };
+      if (localStorage.getItem("preference") != null) {
+        const weather_data = JSON.parse(localStorage.getItem("preference"));
+        weather_data.map((item) => {
+          preference.push(item);
+        });
+      }
+      preference.push(user_preference);
+      localStorage.setItem("preference", JSON.stringify(preference));
       list.append(li);
     })
     .catch(() => {
