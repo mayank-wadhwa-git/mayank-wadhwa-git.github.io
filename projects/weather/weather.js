@@ -61,7 +61,11 @@ form.on("submit", (e) => {
           <span>${name}</span>
           <sup>${sys.country}</sup>
         </h2>
-        <div class="city-temp">${Math.round(main.temp)}<sup>&deg;C</sup></div>
+        <div class="city-temp">${main.temp}<sup>&deg;C</sup></div>
+        <p>
+          <h3>Coldest - ${Math.floor(main.temp_min)}<sup>&deg;C</sup></h3>
+          <h3>Warmest - ${Math.ceil(main.temp_max)}<sup>&deg;C</sup></h3>
+        </p>
         <figure>
           <img class="city-icon" src="${icon}" alt="${
         weather[0]["description"]
@@ -74,7 +78,9 @@ form.on("submit", (e) => {
       const user_preference = {
         city: `${name}`,
         country_code: `${sys.country}`,
-        temp: `${Math.round(main.temp)}`,
+        temp: `${main.temp}`,
+        min_temp: `${Math.floor(main.temp_min)}`,
+        max_temp: `${Math.ceil(main.temp_max)}`,
         icon: `${icon}`,
         desc: `${weather[0]["description"]}`,
       };

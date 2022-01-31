@@ -132,7 +132,7 @@ body {
 }
 
 .weather-section .city-temp {
-  font-size: 5rem;
+  font-size: 4rem;
   font-weight: bold;
   margin-top: 10px;
   color: #1e2432;
@@ -157,7 +157,7 @@ body {
 
 /* MEDIA QUERIES
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
-@media screen and (max-width: 1000px) {
+@media screen and (max-width: 1100px) {
   body {
     padding: 30px;
   }
@@ -167,7 +167,7 @@ body {
   }
 }
 
-@media screen and (max-width: 700px) {
+@media screen and (max-width: 800px) {
   .heading,
   .weather-section .city-temp {
     font-size: 3rem;
